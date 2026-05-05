@@ -24,10 +24,10 @@ Everything needed before writing the first line of library code. This phase prod
 
 ### 0.0.1 — Toolchain & environment
 
-- [ ] **Rust toolchain**
+- [x] **Rust toolchain**
   - [x] `rust-toolchain.toml` pinning latest stable channel (≥ 1.94.0, current MSRV)
   - [x] Components: `rustfmt`, `clippy`, `rust-src`, `rust-analyzer`
-  - [ ] Edition: 2024
+  - [x] Edition: 2024
   - [x] Verify: `rustup show` matches on a fresh clone
 - [x] **Dev tools** (documented in `CONTRIBUTING.md`)
   - [x] `cargo-skill` — layered AI agent skill deployment (mandated for every Rust workspace per project policy)
@@ -48,15 +48,15 @@ Everything needed before writing the first line of library code. This phase prod
 
 ### 0.0.2 — Workspace manifest
 
-- [ ] **Root `Cargo.toml`**
-  - [ ] `[workspace]` with `resolver = "2"`, `members = ["crates/*", "apps/*", "xtask"]`
-  - [ ] `[workspace.package]` with `edition`, `rust-version`, `license = "Apache-2.0"`, `repository`, `homepage`, `authors`, `categories`, `keywords`
-  - [ ] `[workspace.dependencies]` pinning every shared dep to the latest stable minor version (tokio, async-trait, thiserror, anyhow, serde, serde_json, chrono, uuid, phf, reqwest, futures, tracing, tracing-subscriber, criterion, proptest, insta, tempfile, mockito)
-  - [ ] `[workspace.lints.rust]` and `[workspace.lints.clippy]` (see 0.0.4)
-- [ ] **License declaration** — `Apache-2.0` only across the workspace; no dual-license combinations
-- [ ] Verify: `cargo check --workspace` passes with empty `lib.rs` stubs
-- [ ] Verify: `cargo fmt --all -- --check` passes
-- [ ] Verify: `cargo clippy --workspace -- -D warnings` passes
+- [x] **Root `Cargo.toml`**
+  - [x] `[workspace]` with `resolver = "2"`, `members = ["crates/*", "apps/*", "xtask"]`
+  - [x] `[workspace.package]` with `edition`, `rust-version`, `license = "Apache-2.0"`, `repository`, `homepage`, `authors`, `categories`, `keywords`
+  - [x] `[workspace.dependencies]` pinning every shared dep to the latest stable minor version (tokio, async-trait, thiserror, anyhow, serde, serde_json, chrono, uuid, phf, reqwest, futures, tracing, tracing-subscriber, criterion, proptest, insta, tempfile, mockito)
+  - [x] `[workspace.lints.rust]` and `[workspace.lints.clippy]` (see 0.0.4)
+- [x] **License declaration** — `Apache-2.0` only across the workspace; no dual-license combinations
+- [x] Verify: `cargo check --workspace` passes with empty `lib.rs` stubs
+- [x] Verify: `cargo fmt --all -- --check` passes
+- [x] Verify: `cargo clippy --workspace -- -D warnings` passes
 
 ### 0.0.3 — Crate scaffolding (empty shells)
 

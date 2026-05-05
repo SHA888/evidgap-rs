@@ -1,0 +1,50 @@
+[workspace]
+resolver = "2"
+members = ["crates/*", "apps/*"]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.94"
+license = "Apache-2.0"
+repository = "https://github.com/SHA888/evidgap-rs"
+homepage = "https://github.com/SHA888/evidgap-rs"
+authors = ["Kresna Sucandra <kresnasucandra@gmail.com>"]
+categories = []
+keywords = []
+
+[workspace.dependencies]
+tokio = { version = "*", features = ["full"] }
+async-trait = "*"
+thiserror = "*"
+anyhow = "*"
+serde = { version = "*", features = ["derive"] }
+serde_json = "*"
+chrono = "*"
+uuid = "*"
+phf = "*"
+reqwest = { version = "*", features = ["json", "gzip"] }
+futures = "*"
+tracing = "*"
+tracing-subscriber = "*"
+criterion = "*"
+proptest = "*"
+insta = "*"
+tempfile = "*"
+mockito = "*"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unused_results = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+rust_2024_compatibility = { level = "warn", priority = -1 }
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+unwrap_used = "warn"
+expect_used = "warn"
+panic = "warn"
+todo = "warn"
+dbg_macro = "warn"
