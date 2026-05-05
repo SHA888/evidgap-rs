@@ -62,38 +62,38 @@ Everything needed before writing the first line of library code. This phase prod
 
 Each crate gets a publishable-but-empty skeleton with `version = "0.0.0"` (placeholder, unpublished).
 
-- [ ] **`crates/evidgap-id/`** — newtypes, `Xref<T>`, parse-don't-validate
-  - [ ] `Cargo.toml` (no_std capable; default features off; `serde` feature flag)
-  - [ ] `src/lib.rs` with module stubs for each canonical ID
-  - [ ] `README.md`, `CHANGELOG.md` (initialized with `## [Unreleased]`)
-- [ ] **`crates/evidgap-prov/`** — `Sourced<T>`, `Connector` enum, temporal types
-  - [ ] `Cargo.toml` (depends on `chrono`, `thiserror`)
-  - [ ] `src/lib.rs` with stub types
-  - [ ] `README.md`, `CHANGELOG.md`
-- [ ] **`crates/evidgap-graph/`** — entities, relations, `GapMatrix`, `KnowledgeState`
-  - [ ] `Cargo.toml` (depends on `evidgap-id`, `evidgap-prov`)
-  - [ ] `src/lib.rs` with stub types
-  - [ ] `README.md`, `CHANGELOG.md`
-- [ ] **`crates/evidgap-ports/`** — port traits + fixture impls
-  - [ ] `Cargo.toml` (depends on `evidgap-id`, `evidgap-prov`, `evidgap-graph`, `async-trait`; `fixtures` feature flag)
-  - [ ] `src/lib.rs` with stub traits
-  - [ ] `src/fixtures.rs` (gated behind `fixtures` feature)
-  - [ ] `README.md`, `CHANGELOG.md`
-- [ ] **`crates/evidgap-orchestrator/`** — 5-phase engine
-  - [ ] `Cargo.toml` (depends on `evidgap-{id,prov,graph,ports}`, `tokio`, `futures`, `tracing`)
-  - [ ] `src/lib.rs` with stub `Orchestrator`
-  - [ ] `README.md`, `CHANGELOG.md`
-- [ ] **`crates/evidgap-adapter-pubmed/`**, **`crates/evidgap-adapter-chembl/`**, **`crates/evidgap-adapter-clinicaltrials/`**
-  - [ ] One `Cargo.toml` each (depends on `evidgap-ports`, `reqwest` or MCP client library, `tokio`, `serde`)
-  - [ ] One `src/lib.rs` each
-  - [ ] One `README.md`, `CHANGELOG.md` each
-- [ ] **`apps/evidgap-cli/`** — binary
-  - [ ] `Cargo.toml` with `[[bin]] name = "evidgap"`
-  - [ ] `src/main.rs` with empty CLI scaffold
-- [ ] **`xtask/`** — workspace utility crate
-  - [ ] `Cargo.toml` (binary; depends on `syn`, `glob`, `anyhow`)
-  - [ ] `src/main.rs` with subcommand stubs (see 0.0.5)
-- [ ] **Final check:** `cargo check --workspace` compiles all crates
+- [x] **`crates/evidgap-id/`** — newtypes, `Xref<T>`, parse-don't-validate
+  - [x] `Cargo.toml` (no_std capable; default features off; `serde` feature flag)
+  - [x] `src/lib.rs` with module stubs for each canonical ID
+  - [x] `README.md`, `CHANGELOG.md` (initialized with `## [Unreleased]`)
+- [x] **`crates/evidgap-prov/`** — `Sourced<T>`, `Connector` enum, temporal types
+  - [x] `Cargo.toml` (depends on `chrono`, `thiserror`)
+  - [x] `src/lib.rs` with stub types
+  - [x] `README.md`, `CHANGELOG.md`
+- [x] **`crates/evidgap-graph/`** — entities, relations, `GapMatrix`, `KnowledgeState`
+  - [x] `Cargo.toml` (depends on `evidgap-id`, `evidgap-prov`)
+  - [x] `src/lib.rs` with stub types
+  - [x] `README.md`, `CHANGELOG.md`
+- [x] **`crates/evidgap-ports/`** — port traits + fixture impls
+  - [x] `Cargo.toml` (depends on `evidgap-id`, `evidgap-prov`, `evidgap-graph`, `async-trait`; `fixtures` feature flag)
+  - [x] `src/lib.rs` with stub traits
+  - [x] `src/fixtures.rs` (gated behind `fixtures` feature)
+  - [x] `README.md`, `CHANGELOG.md`
+- [x] **`crates/evidgap-orchestrator/`** — 5-phase engine
+  - [x] `Cargo.toml` (depends on `evidgap-{id,prov,graph,ports}`, `tokio`, `futures`, `tracing`)
+  - [x] `src/lib.rs` with stub `Orchestrator`
+  - [x] `README.md`, `CHANGELOG.md`
+- [x] **`crates/evidgap-adapter-pubmed/`**, **`crates/evidgap-adapter-chembl/`**, **`crates/evidgap-adapter-clinicaltrials/`**
+  - [x] One `Cargo.toml` each (depends on `evidgap-ports`, `reqwest` or MCP client library, `tokio`, `serde`)
+  - [x] One `src/lib.rs` each
+  - [x] One `README.md`, `CHANGELOG.md` each
+- [x] **`apps/evidgap-cli/`** — binary
+  - [x] `Cargo.toml` with `[[bin]] name = "evidgap"`
+  - [x] `src/main.rs` with empty CLI scaffold
+- [x] **`xtask/`** — workspace utility crate
+  - [x] `Cargo.toml` (binary; depends on `syn`, `glob`, `anyhow`)
+  - [x] `src/main.rs` with subcommand stubs (see 0.0.5)
+- [x] **Final check:** `cargo check --workspace` compiles all crates
 
 ### 0.0.4 — Code quality configuration
 

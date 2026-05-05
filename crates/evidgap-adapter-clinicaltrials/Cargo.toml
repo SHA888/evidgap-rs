@@ -1,0 +1,10 @@
+[package]
+name = "evidgap-adapter-clinicaltrials"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]
+evidgap-ports = { path = "../../crates/evidgap-ports" }
+reqwest = { version = "*", features = ["json", "gzip"] }
+tokio = { version = "*", features = ["full"] }
+serde = { version = "*", features = ["derive"] }

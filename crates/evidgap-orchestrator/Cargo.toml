@@ -1,0 +1,13 @@
+[package]
+name = "evidgap-orchestrator"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]
+evidgap-id = { path = "../../crates/evidgap-id" }
+evidgap-prov = { path = "../../crates/evidgap-prov" }
+evidgap-graph = { path = "../../crates/evidgap-graph" }
+evidgap-ports = { path = "../../crates/evidgap-ports" }
+tokio = { version = "*", features = ["full"] }
+futures = "*"
+tracing = "*"
