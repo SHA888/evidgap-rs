@@ -1,0 +1,12 @@
+target/
+data/
+*.parquet
+*.arrow
+*.ipc
+.env
+*.csv.gz
+coverage/
+
+.vscode/
+.idea/
+.zed/

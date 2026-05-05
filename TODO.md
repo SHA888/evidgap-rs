@@ -25,26 +25,26 @@ Everything needed before writing the first line of library code. This phase prod
 ### 0.0.1 — Toolchain & environment
 
 - [ ] **Rust toolchain**
-  - [ ] `rust-toolchain.toml` pinning latest stable channel (≥ 1.94.0, current MSRV)
-  - [ ] Components: `rustfmt`, `clippy`, `rust-src`, `rust-analyzer`
+  - [x] `rust-toolchain.toml` pinning latest stable channel (≥ 1.94.0, current MSRV)
+  - [x] Components: `rustfmt`, `clippy`, `rust-src`, `rust-analyzer`
   - [ ] Edition: 2024
-  - [ ] Verify: `rustup show` matches on a fresh clone
-- [ ] **Dev tools** (documented in `CONTRIBUTING.md`, installed by every contributor)
-  - [ ] `cargo-skill` — layered AI agent skill deployment (mandated for every Rust workspace per project policy)
-  - [ ] `cargo-nextest` — parallel test runner with better output than `cargo test`
-  - [ ] `cargo-deny` — license audit, advisory DB, dependency policy
-  - [ ] `cargo-release` — workspace-aware SemVer release flow
-  - [ ] `cargo-audit` — security advisory checking against RustSec
-  - [ ] `cargo-semver-checks` — SemVer violation detection on every release
-  - [ ] `cargo-machete` — detect unused dependencies
-  - [ ] `cargo-udeps` (nightly only, optional) — compile-time unused-dep detection
-  - [ ] `git-cliff` — Conventional Commits changelog generation
-  - [ ] `typos-cli` — spelling check across docs and code
-- [ ] **Git configuration**
-  - [ ] `.gitignore`: `target/`, `data/`, `*.parquet`, `*.arrow`, `*.ipc`, `.env`, `*.csv.gz`, `coverage/`
-  - [ ] `.gitattributes`: `*.rs diff=rust`, LF line endings enforced
-  - [ ] Conventional Commits enforced via `CONTRIBUTING.md` (feat/fix/docs/chore/refactor/test/ci/perf)
-  - [ ] `.pre-commit-config.yaml`: `cargo fmt --check`, `cargo clippy -D warnings`, `typos`, `cargo deny check advisories`
+  - [x] Verify: `rustup show` matches on a fresh clone
+- [x] **Dev tools** (documented in `CONTRIBUTING.md`)
+  - [x] `cargo-skill` — layered AI agent skill deployment (mandated for every Rust workspace per project policy)
+  - [x] `cargo-nextest` — parallel test runner with better output than `cargo test`
+  - [x] `cargo-deny` — license audit, advisory DB, dependency policy
+  - [x] `cargo-release` — workspace-aware SemVer release flow
+  - [x] `cargo-audit` — security advisory checking against RustSec
+  - [x] `cargo-semver-checks` — SemVer violation detection on every release
+  - [x] `cargo-machete` — detect unused dependencies
+  - [x] `cargo-udeps` (nightly only, optional) — compile-time unused-dep detection
+  - [x] `git-cliff` — Conventional Commits changelog generation
+  - [x] `typos-cli` — spelling check across docs and code
+- [x] **Git configuration**
+  - [x] `.gitignore`: `target/`, `data/`, `*.parquet`, `*.arrow`, `*.ipc`, `.env`, `*.csv.gz`, `coverage/`
+  - [x] `.gitattributes`: `*.rs diff=rust`, LF line endings enforced
+  - [x] Conventional Commits enforced via `CONTRIBUTING.md` (feat/fix/docs/chore/refactor/test/ci/perf)
+  - [x] `.pre-commit-config.yaml`: `cargo fmt --check`, `cargo clippy -D warnings`, `typos`, `cargo deny check advisories`
 
 ### 0.0.2 — Workspace manifest
 
@@ -524,7 +524,7 @@ API freeze. Every public surface reviewed and committed-to.
 
 These are not feature additions but **bridges into adjacent ecosystems**. Each export adapter takes the canonical `KnowledgeState` produced by the orchestrator and serializes it into another ecosystem's preferred format. The native serialization remains canonical for full-fidelity gap-aware consumption; export adapters are subset views by definition.
 
-Sequencing is demand-driven: an export adapter ships when the first downstream consumer asks for it, not before. The list below is a roadmap of *known* potential bridges, not a commitment to ship all of them.
+Sequencing is demand-driven: an export adapter ships when the first downstream consumer asks for it, not before. The list below is a roadmap of _known_ potential bridges, not a commitment to ship all of them.
 
 ### `evidgap-export-trapi` — bridge to NCATS Translator ecosystem
 
@@ -545,7 +545,7 @@ Serializes the **positive-evidence subset** of `KnowledgeState` into TRAPI-compl
 - [ ] **CI gate** — `reasoner-validator` runs on every CI build over a representative `KnowledgeState` fixture
 - [ ] **BioLink Model version tracking** — embedded reference to a pinned BioLink release; minor version bumps in BioLink land in CHANGELOG with explicit predicate-hierarchy diff
 - [ ] **Dependencies** — `evidgap-graph`, `evidgap-orchestrator`
-- [ ] **Estimated cost** — 4–6 weeks of focused work for v0.1.0 of this adapter, **down from an initial estimate of 6–8 weeks** because OptimusKG's BioLink Model alignment for 10 entity types and 26 relation predicates (Vittor et al., *Nature Scientific Data* 2026) provides a worked-example mapping reference; the adapter borrows their validated mappings rather than designing from scratch
+- [ ] **Estimated cost** — 4–6 weeks of focused work for v0.1.0 of this adapter, **down from an initial estimate of 6–8 weeks** because OptimusKG's BioLink Model alignment for 10 entity types and 26 relation predicates (Vittor et al., _Nature Scientific Data_ 2026) provides a worked-example mapping reference; the adapter borrows their validated mappings rather than designing from scratch
 
 ### `evidgap-export-eppi` — bridge to EPPI-Mapper
 
@@ -586,13 +586,13 @@ Wraps `evidgap-orchestrator` as an MCP server so other Claude / LLM tooling can 
 
 ### Adoption-surface summary
 
-| Bridge                       | Target ecosystem                    | What survives the bridge                                              | Cost (focused work) |
-|------------------------------|-------------------------------------|-----------------------------------------------------------------------|---------------------|
-| `evidgap-export-trapi`       | NCATS Translator (KP-mode)          | Positive-evidence subset; gap matrix folded into `logs` only          | 4–6 weeks (with OptimusKG mapping reuse) |
-| `evidgap-export-eppi`        | EPPI-Mapper                          | Full gap matrix; EPPI is gap-aware                                    | 2–3 weeks           |
-| `evidgap-export-eviatlas`    | EviAtlas                             | Tabular evidence base; gap signal partial                             | 1–2 weeks           |
-| `evidgap-export-graphdb`     | Neo4j / RDF stores                   | Full `KnowledgeState`; gap matrix as separate sub-graph or named graph | 3–4 weeks           |
-| `evidgap-mcp-server`         | LLM tooling (Claude, others)         | Full surface, query-by-query                                          | 2–3 weeks           |
+| Bridge                    | Target ecosystem             | What survives the bridge                                               | Cost (focused work)                      |
+| ------------------------- | ---------------------------- | ---------------------------------------------------------------------- | ---------------------------------------- |
+| `evidgap-export-trapi`    | NCATS Translator (KP-mode)   | Positive-evidence subset; gap matrix folded into `logs` only           | 4–6 weeks (with OptimusKG mapping reuse) |
+| `evidgap-export-eppi`     | EPPI-Mapper                  | Full gap matrix; EPPI is gap-aware                                     | 2–3 weeks                                |
+| `evidgap-export-eviatlas` | EviAtlas                     | Tabular evidence base; gap signal partial                              | 1–2 weeks                                |
+| `evidgap-export-graphdb`  | Neo4j / RDF stores           | Full `KnowledgeState`; gap matrix as separate sub-graph or named graph | 3–4 weeks                                |
+| `evidgap-mcp-server`      | LLM tooling (Claude, others) | Full surface, query-by-query                                           | 2–3 weeks                                |
 
 ---
 
@@ -600,16 +600,16 @@ Wraps `evidgap-orchestrator` as an MCP server so other Claude / LLM tooling can 
 
 Tracked for roadmap visibility. Will not block any 1.0 release.
 
-| Crate                          | Purpose                                                   | Depends on                            |
-|--------------------------------|-----------------------------------------------------------|---------------------------------------|
-| `evidgap-adapter-crossref`     | DOI metadata enrichment from Crossref.org                 | `evidgap-ports`                       |
-| `evidgap-adapter-europepmc`    | Europe PMC literature index (alternative to PubMed)       | `evidgap-ports`                       |
-| `evidgap-adapter-rxnorm`       | RxNorm drug nomenclature                                  | `evidgap-ports`                       |
-| `evidgap-adapter-mesh`         | MeSH literature indexing terms                            | `evidgap-ports`                       |
-| `evidgap-adapter-hpo`          | Human Phenotype Ontology                                  | `evidgap-ports`                       |
-| `evidgap-adapter-omim`         | OMIM Mendelian disease catalog                            | `evidgap-ports`                       |
-| `evidgap-adapter-biorex`       | BioREx-extracted relations as `EvidencePort` aux input    | `evidgap-ports`                       |
-| `evidgap-cache`                | Optional caching layer (sled or rocksdb backend)          | `evidgap-ports`                       |
+| Crate                       | Purpose                                                | Depends on      |
+| --------------------------- | ------------------------------------------------------ | --------------- |
+| `evidgap-adapter-crossref`  | DOI metadata enrichment from Crossref.org              | `evidgap-ports` |
+| `evidgap-adapter-europepmc` | Europe PMC literature index (alternative to PubMed)    | `evidgap-ports` |
+| `evidgap-adapter-rxnorm`    | RxNorm drug nomenclature                               | `evidgap-ports` |
+| `evidgap-adapter-mesh`      | MeSH literature indexing terms                         | `evidgap-ports` |
+| `evidgap-adapter-hpo`       | Human Phenotype Ontology                               | `evidgap-ports` |
+| `evidgap-adapter-omim`      | OMIM Mendelian disease catalog                         | `evidgap-ports` |
+| `evidgap-adapter-biorex`    | BioREx-extracted relations as `EvidencePort` aux input | `evidgap-ports` |
+| `evidgap-cache`             | Optional caching layer (sled or rocksdb backend)       | `evidgap-ports` |
 
 ---
 

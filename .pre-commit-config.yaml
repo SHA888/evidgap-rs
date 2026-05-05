@@ -1,0 +1,26 @@
+repos:
+  - repo: local
+    hooks:
+      - id: cargo-fmt-check
+        name: cargo fmt --check
+        entry: cargo fmt --all -- --check
+        language: system
+        pass_filenames: false
+
+      - id: cargo-clippy-deny-warnings
+        name: cargo clippy -D warnings
+        entry: cargo clippy --workspace --all-targets --all-features -- -D warnings
+        language: system
+        pass_filenames: false
+
+      - id: typos
+        name: typos
+        entry: typos
+        language: system
+        pass_filenames: false
+
+      - id: cargo-deny-advisories
+        name: cargo deny check advisories
+        entry: cargo deny check advisories
+        language: system
+        pass_filenames: false
