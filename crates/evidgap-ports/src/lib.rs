@@ -7,6 +7,12 @@ use async_trait::async_trait;
 #[async_trait]
 pub trait MechanismPort: Send + Sync {
     /// Compounds known to target this protein.
+    ///
+    /// # Cardinality
+    ///
+    /// Returns `Vec<Sourced<Compound>>` because the set of compounds targeting a single
+    /// protein is small and bounded (typically <1000). `ChEMBL` and `PubMed` both paginate
+    /// within these bounds for single-target queries.
     async fn compounds_for_target(&self) -> Result<Vec<String>, String>;
 }
 

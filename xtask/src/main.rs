@@ -1,6 +1,7 @@
 use anyhow::Result;
 use std::env;
 
+mod check_cardinality;
 mod check_ports;
 
 fn main() -> Result<()> {
@@ -15,6 +16,7 @@ fn main() -> Result<()> {
 
     match subcommand.as_str() {
         "check-ports" => check_ports::check_ports(),
+        "check-cardinality" => check_cardinality::check_cardinality(),
         _ => {
             eprintln!("Unknown subcommand: {}", subcommand);
             print_usage();
