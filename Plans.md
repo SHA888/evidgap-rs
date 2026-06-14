@@ -12,7 +12,7 @@ Configuration files that gate all downstream CI/CD and enforce workspace-wide st
 |------|---------|-----|---------|--------|
 | 0.4.1 | Create `rustfmt.toml` with edition 2024, max_width 100, import granularity | `cargo fmt --all -- --check` passes; formatting consistent across workspace | - | cc:done [65bd148] |
 | 0.4.2 | Create `deny.toml` with advisories, licenses, bans, sources policies | `cargo deny check` passes with no errors or warnings | - | cc:done [f49150a] |
-| 0.4.3 | Update all 8 crate `Cargo.toml` files to inherit workspace lints via `lints = workspace = true` | `cargo clippy --workspace --all-targets --all-features -- -D warnings` passes | 0.4.1, 0.4.2 | cc:todo |
+| 0.4.3 | Update all 8 crate `Cargo.toml` files to inherit workspace lints via `lints = workspace = true` | `cargo clippy --workspace --all-targets --all-features -- -D warnings` passes | 0.4.1, 0.4.2 | cc:done [ab3d971] |
 | 0.4.4 | Verify `cargo check --workspace` and `cargo fmt --check` pass on fresh state | All checks pass; no formatting drift | 0.4.3 | cc:todo |
 
 ---
