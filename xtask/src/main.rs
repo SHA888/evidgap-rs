@@ -3,6 +3,7 @@ use std::env;
 
 mod check_cardinality;
 mod check_ports;
+mod check_provenance;
 
 fn main() -> Result<()> {
     let args: Vec<String> = env::args().collect();
@@ -17,6 +18,7 @@ fn main() -> Result<()> {
     match subcommand.as_str() {
         "check-ports" => check_ports::check_ports(),
         "check-cardinality" => check_cardinality::check_cardinality(),
+        "check-provenance" => check_provenance::check_provenance(),
         _ => {
             eprintln!("Unknown subcommand: {}", subcommand);
             print_usage();
