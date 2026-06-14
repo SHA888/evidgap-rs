@@ -10,3 +10,8 @@ coverage/
 .vscode/
 .idea/
 .zed/
+
+# Claude Code local state (harness, worktrees, snapshots)
+.claude/
+.harness-mem/
+out/
