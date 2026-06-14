@@ -3,6 +3,9 @@ name = "evidgap-id"
 version = "0.0.0"
 edition = "2024"
 
+[lints]
+workspace = true
+
 [features]
 default = []
 serde = ["dep:serde"]
