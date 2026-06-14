@@ -330,6 +330,15 @@ cargo insta review
 
 Add a temporary fixture adapter behind `#[cfg(test)]` to simulate a port response without hitting a live endpoint. Example in `evidgap-ports/src/fixtures.rs`.
 
+## Commit messages and history
+
+**No `Co-Authored-By:` trailers.** Commit attribution stays with the human author. Boilerplate trailers add noise without meaningful authorship value and are retroactively stripped. This applies to all AI-generated commits, including those produced by Claude Code or any other AI tool.
+
+**English-only requirement** for tracked files:
+- All Plans.md content must be in English (headers, table columns, task descriptions, status markers)
+- No Japanese characters in Plans.md status markers (use `cc:done` instead of `cc:完了`, `cc:wip` instead of `cc:WIP`, etc.)
+- All harness output and documentation must be in English
+
 ## License and compliance
 
 - License: **Apache-2.0** only (no MIT/BSD; patent grant is load-bearing for federation touching drug discovery)
