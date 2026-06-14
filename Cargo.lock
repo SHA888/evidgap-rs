@@ -278,6 +278,7 @@ dependencies = [
 name = "evidgap-adapter-pubmed"
 version = "0.0.0"
 dependencies = [
+ "async-trait",
  "evidgap-ports",
  "reqwest",
  "serde",
