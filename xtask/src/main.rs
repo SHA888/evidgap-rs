@@ -7,6 +7,7 @@ mod check_coverage;
 mod check_msrv;
 mod check_ports;
 mod check_provenance;
+mod check_release;
 
 fn main() -> Result<()> {
     let args: Vec<String> = env::args().collect();
@@ -25,6 +26,7 @@ fn main() -> Result<()> {
         "check-msrv" => check_msrv::check_msrv(),
         "audit" => check_audit::check_audit(),
         "coverage" => check_coverage::check_coverage(),
+        "release-dry-run" => check_release::check_release(),
         _ => {
             eprintln!("Unknown subcommand: {}", subcommand);
             print_usage();
@@ -45,5 +47,5 @@ fn print_usage() {
     eprintln!("  check-msrv        Check MSRV build (1.94.0)");
     eprintln!("  audit             Run cargo audit + cargo deny advisories check");
     eprintln!("  coverage          Generate workspace coverage report (optional)");
-    eprintln!("  release-dry-run   Dry-run release with cargo release (TODO)");
+    eprintln!("  release-dry-run   Dry-run release with cargo release");
 }
