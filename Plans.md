@@ -26,10 +26,10 @@ CI gate enforcement scripts that verify design principles (dual-adapter rule, pr
 | 0.5.1 | Implement `xtask check-ports` — enumerate port traits via syn, verify >= 2 impls (1 fixture, 1 real) per trait | Command exits 0; rejects workspace if any port has < 2 impls; used in CI | 0.4.4 | cc:done [a1587bf] |
 | 0.5.2 | Implement `xtask check-cardinality` — parse rustdoc, verify each port method has `# Cardinality` section with Vec/Stream rationale | Command exits 0 on port traits with cardinality docs; fails if missing | 0.5.1 | cc:done [13c2952] |
 | 0.5.3 | Implement `xtask check-provenance` — parse port method return types, fail if bare entity types cross boundary (require Sourced<T>) | Command exits 0; rejects port methods returning bare T without Sourced wrapper | 0.5.2 | cc:done |
-| 0.5.4 | Implement `xtask check-msrv` — install MSRV toolchain, run `cargo check --workspace` | Command succeeds on MSRV (1.94); gated by CI weekly | 0.5.3 | cc:todo |
-| 0.5.5 | Implement `xtask audit` — wrap `cargo audit` and `cargo deny check` with clear error messages | Command aggregates both audits into single exit code | 0.5.4 | cc:todo |
-| 0.5.6 | Implement `xtask coverage` — wrap `cargo llvm-cov` for unified workspace coverage (optional for Phase 0; defer if llvm-tools unavailable) | Command produces coverage report or exits with explicit "llvm-tools not available" | 0.5.5 | cc:todo |
-| 0.5.7 | Implement `xtask release-dry-run` — invoke `cargo release --dry-run` with workspace-aware tag inference | Command outputs release plan without publishing; used pre-release | 0.5.6 | cc:todo |
+| 0.5.4 | Implement `xtask check-msrv` — install MSRV toolchain, run `cargo check --workspace` | Command succeeds on MSRV (1.94); gated by CI weekly | 0.5.3 | cc:done |
+| 0.5.5 | Implement `xtask audit` — wrap `cargo audit` and `cargo deny check` with clear error messages | Command aggregates both audits into single exit code | 0.5.4 | cc:done |
+| 0.5.6 | Implement `xtask coverage` — wrap `cargo llvm-cov` for unified workspace coverage (optional for Phase 0; defer if llvm-tools unavailable) | Command produces coverage report or exits with explicit "llvm-tools not available" | 0.5.5 | cc:done |
+| 0.5.7 | Implement `xtask release-dry-run` — invoke `cargo release --dry-run` with workspace-aware tag inference | Command outputs release plan without publishing; used pre-release | 0.5.6 | cc:done |
 
 ---
 
