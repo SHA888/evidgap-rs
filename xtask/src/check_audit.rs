@@ -6,8 +6,17 @@ use std::process::Command;
 pub fn check_audit() -> Result<()> {
     eprintln!("📋 Auditing workspace for security advisories...");
 
+    // Step 0: Check if cargo-audit is available
+    eprintln!("\n  • Checking for cargo-audit...");
+    let audit_check = Command::new("cargo").args(["audit", "--version"]).output();
+    if audit_check.is_err() || !audit_check.unwrap().status.success() {
+        return Err(anyhow::anyhow!(
+            "cargo-audit not found (install: cargo install cargo-audit)"
+        ));
+    }
+
     // Step 1: Run cargo audit
-    eprintln!("\n  • Running 'cargo audit'...");
+    eprintln!("  • Running 'cargo audit'...");
     let audit_output = Command::new("cargo")
         .arg("audit")
         .output()

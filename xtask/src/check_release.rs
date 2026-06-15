@@ -1,5 +1,5 @@
 use anyhow::Result;
-use std::process::Command;
+use std::process::{Command, Stdio};
 
 /// Simulate a release with `cargo release --dry-run`.
 /// Verifies SemVer compliance and shows proposed tags without publishing.
@@ -25,39 +25,31 @@ pub fn check_release() -> Result<()> {
         }
     }
 
-    // Step 2: Check if release.toml exists
+    // Step 2: Check if release.toml exists (workspace-relative)
     eprintln!("  • Checking for release.toml...");
-    if !std::path::Path::new("release.toml").exists() {
+    let workspace_root = std::env::current_dir()?;
+    let release_toml = workspace_root.join("release.toml");
+    if !release_toml.exists() {
         eprintln!("ℹ  release.toml not found (will be created in Phase 0.0.8)");
         eprintln!("ℹ  Skipping dry-run until release configuration is ready");
         return Ok(());
     }
     eprintln!("  ✓ Found: release.toml");
 
-    // Step 3: Run cargo release dry-run
-    eprintln!("\n  • Running 'cargo release --dry-run'...");
-    let release_output = Command::new("cargo")
-        .args(["release", "--dry-run", "--allow-dirty"])
-        .output()
+    // Step 3: Run cargo release dry-run (inherit stdout/stderr for live output)
+    eprintln!("\n  • Running 'cargo release patch --workspace'...\n");
+    let status = Command::new("cargo")
+        .args(["release", "patch", "--workspace"])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .status()
         .map_err(|e| anyhow::anyhow!("Failed to run cargo release: {}", e))?;
 
-    let stdout = String::from_utf8_lossy(&release_output.stdout);
-    let stderr = String::from_utf8_lossy(&release_output.stderr);
-
-    if !release_output.status.success() {
-        eprintln!(
-            "\n❌ Release dry-run failed. Check output for details.\n{}\n{}",
-            stdout, stderr
-        );
+    if !status.success() {
+        eprintln!("\n❌ Release dry-run failed; review SemVer and CHANGELOG entries");
         return Err(anyhow::anyhow!(
-            "cargo release --dry-run failed; review SemVer and CHANGELOG entries"
+            "cargo release --dry-run failed; check output above for details"
         ));
-    }
-
-    // Step 4: Report results
-    eprint!("{}", stdout);
-    if !stderr.is_empty() {
-        eprint!("{}", stderr);
     }
 
     eprintln!("\n✓ Release dry-run simulation passed");

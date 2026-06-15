@@ -1,5 +1,5 @@
 use anyhow::Result;
-use std::process::Command;
+use std::process::{Command, Stdio};
 
 /// Generate code coverage report for the workspace.
 /// Requires cargo-llvm-cov and llvm-tools-preview component.
@@ -26,30 +26,20 @@ pub fn check_coverage() -> Result<()> {
         }
     }
 
-    // Step 2: Run cargo llvm-cov to generate coverage report
-    eprintln!("\n  • Running 'cargo llvm-cov --workspace --html'...");
-    let coverage_output = Command::new("cargo")
+    // Step 2: Run cargo llvm-cov to generate coverage report (inherit stdout/stderr for live output)
+    eprintln!("\n  • Running 'cargo llvm-cov --workspace --html'...\n");
+    let status = Command::new("cargo")
         .args(["llvm-cov", "--workspace", "--html"])
-        .output()
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .status()
         .map_err(|e| anyhow::anyhow!("Failed to run cargo llvm-cov: {}", e))?;
 
-    let stdout = String::from_utf8_lossy(&coverage_output.stdout);
-    let stderr = String::from_utf8_lossy(&coverage_output.stderr);
-
-    if !coverage_output.status.success() {
-        eprintln!(
-            "\n❌ Coverage generation failed. Check output above for details.\n{}\n{}",
-            stdout, stderr
-        );
+    if !status.success() {
+        eprintln!("\n❌ Coverage generation failed; ensure llvm-tools-preview is installed");
         return Err(anyhow::anyhow!(
-            "cargo llvm-cov failed; ensure llvm-tools-preview is installed"
+            "cargo llvm-cov failed; check output above for details"
         ));
-    }
-
-    // Step 3: Report results
-    eprint!("{}", stdout);
-    if !stderr.is_empty() {
-        eprint!("{}", stderr);
     }
 
     eprintln!("\n✓ Workspace coverage report generated");
